@@ -9,8 +9,9 @@ nav_order: 2
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Mon modeèle 3D</title>
-        <script src="https://modelviewer.dev/shared/model-viewer-base.js"></script>
+        <title>Mon modèle 3D</title>
+        <!-- Correction du lien du script model-viewer -->
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     </head>
     <body>
         <p>mon nouveau projet !</p>
@@ -25,5 +26,5 @@ nav_order: 2
                 <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
             </div>
         </model-viewer>
-          </body>
+    </body>
 </html>
