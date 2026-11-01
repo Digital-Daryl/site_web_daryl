@@ -35,7 +35,7 @@ function afficherMessage(texte, expediteur) {
 
 // 2. Fonction d'appel vers ton webhook n8n
 async function envoyerMessageAuBot(messageUtilisateur) {
-    const urlWebhookN8n = "VOTRE_URL_WEBHOOK_N8N_ICI"; // Remplace par ton URL n8n active
+    const urlWebhookN8n = "http://localhost:5678/webhook-test/support-chat"; // Remplace par ton URL n8n active
 
     try {
         const reponse = await fetch(urlWebhookN8n, {
