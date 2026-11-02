@@ -532,13 +532,13 @@
 
         #chat-box {
             display: flex;
-            position: absolute;
-            right: 0;
-            bottom: calc(100% + 16px);
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
             flex-direction: column;
             width: min(390px, calc(100vw - 32px));
-            height: min(600px, calc(100dvh - 110px));
-            min-height: min(380px, calc(100dvh - 110px));
+            height: min(600px, calc(100dvh - 120px));
+            min-height: min(380px, calc(100dvh - 120px));
             color: var(--text-color);
             background: var(--white);
             border: 1px solid #e2e8f0;
