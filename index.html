@@ -22,7 +22,12 @@
                 <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=150&auto=format&fit=crop" alt="Logo DARYL">
                 DARYL
             </div>
-            <div class="tabs">
+            <button id="menu-toggle-btn" class="menu-toggle-btn" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Ouvrir le menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div id="site-menu" class="tabs">
                 <button class="tab-btn active" onclick="openTab(event, 'accueil')">Accueil</button>
                 <button class="tab-btn" onclick="openTab(event, 'services')">Nos Services</button>
                 <button class="tab-btn" onclick="openTab(event, 'apropos')">À propos</button>
@@ -150,14 +155,84 @@
                 }
             }
         }
+
+        const menuToggleBtn = document.getElementById('menu-toggle-btn');
+        const siteMenu = document.getElementById('site-menu');
+        const siteNav = document.querySelector('nav');
+        const mobileMenuQuery = window.matchMedia('(max-width: 768px)');
+
+        function setSiteMenuOpen(isOpen) {
+            menuToggleBtn.setAttribute('aria-expanded', String(isOpen));
+            menuToggleBtn.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
+            siteMenu.classList.toggle('is-open', isOpen);
+            siteMenu.inert = mobileMenuQuery.matches && !isOpen;
+        }
+
+        menuToggleBtn.addEventListener('click', () => {
+            setSiteMenuOpen(menuToggleBtn.getAttribute('aria-expanded') !== 'true');
+        });
+
+        siteMenu.querySelectorAll('.tab-btn').forEach((tabButton) => {
+            tabButton.addEventListener('click', () => setSiteMenuOpen(false));
+        });
+
+        document.addEventListener('click', (event) => {
+            if (mobileMenuQuery.matches
+                && menuToggleBtn.getAttribute('aria-expanded') === 'true'
+                && !siteNav.contains(event.target)) {
+                setSiteMenuOpen(false);
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && menuToggleBtn.getAttribute('aria-expanded') === 'true') {
+                setSiteMenuOpen(false);
+                menuToggleBtn.focus();
+            }
+        });
+
+        mobileMenuQuery.addEventListener('change', (event) => {
+            setSiteMenuOpen(false);
+            siteMenu.inert = event.matches;
+        });
+
+        siteMenu.inert = mobileMenuQuery.matches;
     </script>
     <!-- Widget de Chat -->
     <div id="chat-container">
-        <button id="chat-toggle-btn">💬 Support</button>
-        <div id="chat-box">
-            <div id="chat-messages"></div>
-            <input type="text" id="chat-input" placeholder="Écris ton message...">
-            <button id="chat-send-btn">Envoyer</button>
+        <button id="chat-toggle-btn" type="button" aria-expanded="false" aria-controls="chat-box">
+            <span class="chat-launcher-avatar" aria-hidden="true">
+                <span class="chat-robot-face">🤖</span>
+                <span class="chat-wave-hand">👋</span>
+            </span>
+            <span class="chat-launcher-text"><span>Puis-je vous</span><span>accompagner</span></span>
+        </button>
+        <div id="chat-box" hidden role="dialog" aria-label="Assistant Orion" aria-hidden="true" inert>
+            <header class="chat-header">
+                <span class="chat-header-avatar" aria-hidden="true">🤖</span>
+                <div class="chat-header-copy">
+                    <h2>Besoin d'aide&nbsp;?</h2>
+                    <p>Votre assistant Orion vous répond</p>
+                </div>
+                <button id="chat-close-btn" class="chat-close-btn" type="button" aria-label="Fermer la conversation">×</button>
+            </header>
+            <div id="chat-messages" aria-live="polite" aria-relevant="additions"></div>
+            <div id="chat-quick-replies" class="chat-quick-replies" aria-label="Questions fréquentes">
+                <p>Questions fréquentes</p>
+                <div class="chat-quick-reply-list">
+                    <button class="chat-quick-reply" type="button">Je souhaite créer un site vitrine</button>
+                    <button class="chat-quick-reply" type="button">Je cherche un assistant virtuel</button>
+                    <button class="chat-quick-reply" type="button">Quels sont vos tarifs&nbsp;?</button>
+                    <button class="chat-quick-reply" type="button">Je veux le Pack Digital Complet</button>
+                    <button class="chat-quick-reply" type="button">Je souhaite parler à un conseiller</button>
+                </div>
+            </div>
+            <form id="chat-form" class="chat-composer">
+                <input type="text" id="chat-input" placeholder="Écrivez votre message..." aria-label="Votre message" autocomplete="off">
+                <button id="chat-send-btn" type="submit" aria-label="Envoyer le message">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.4 3.2 22 12 2.4 20.8l1.5-7.1L14 12l-10.1-1.7L2.4 3.2Z" fill="currentColor"/></svg>
+                </button>
+            </form>
         </div>
     </div>
     
