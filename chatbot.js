@@ -6,6 +6,7 @@ const sendBtn = document.getElementById('chat-send-btn');
 const chatInput = document.getElementById('chat-input');
 const chatMessages = document.getElementById('chat-messages');
 const quickReplies = document.getElementById('chat-quick-replies');
+let accueilDemande = false;
 
 function getChatSessionId() {
     let sessionId = localStorage.getItem("Chat_Session");
@@ -33,10 +34,10 @@ function ouvrirChat() {
     toggleBtn.setAttribute('aria-expanded', 'true');
     chatInput.focus();
 
-    if (!chatMessages.hasChildNodes()) {
-        afficherMessage(
-            'Bonjour et bienvenue chez DARYL ! Comment pouvons-nous vous aider dans votre projet digital ?',
-            'bot'
+    if (!accueilDemande) {
+        accueilDemande = true;
+        envoyerMessageAuBot(
+            'Le client ouvre le chat pour la première fois. Rédige un message d’accueil chaleureux et demande-lui comment tu peux l’aider dans son projet digital.'
         );
     }
 }
