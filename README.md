@@ -1,4 +1,4 @@
-# DARYL — Solutions digitales pour entreprises
+# DARYL | Solutions digitales pour entreprises
 
 DARYL accompagne les entreprises, commerçants et restaurateurs dans leur
 transition numérique. Ce dépôt contient le code source du site vitrine de
