@@ -7,6 +7,17 @@ const chatInput = document.getElementById('chat-input');
 const chatMessages = document.getElementById('chat-messages');
 const quickReplies = document.getElementById('chat-quick-replies');
 
+function getChatSessionId() {
+    let sessionId = localStorage.getItem("Chat_Session");
+
+    if (!sessionId) {
+        sessionId = crypto.randomUUID();
+        localStorage.setItem("Chat_Session", sessionId);
+    }
+
+    return sessionId;
+}
+
 function afficherMessage(texte, expediteur) {
     const message = document.createElement('div');
     message.classList.add('chat-message', `chat-message-${expediteur}`);
@@ -49,7 +60,7 @@ async function envoyerMessageAuBot(messageUtilisateur) {
             },
             body: JSON.stringify({
                 chatInput: messageUtilisateur,
-                sessionId: 'client_unique_123'
+                sessionId: getChatSessionId()
             })
         });
 
