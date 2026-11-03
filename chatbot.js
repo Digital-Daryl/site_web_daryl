@@ -39,7 +39,7 @@ function fermerChat() {
 }
 
 async function envoyerMessageAuBot(messageUtilisateur) {
-    const urlWebhookN8n = 'http://localhost:5678/webhook-test/support-chat';
+    const urlWebhookN8n = 'https://chatbot-backend.darylsfotsingk.workers.dev/chat';
 
     try {
         const reponse = await fetch(urlWebhookN8n, {
