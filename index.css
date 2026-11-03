@@ -49,6 +49,26 @@
             gap: 10px;
         }
 
+        .logo-copy {
+            height: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .logo-name {
+            font-size: 1.5rem;
+            line-height: 24px;
+        }
+
+        .logo-tagline {
+            font-size: 9px;
+            font-weight: 400;
+            line-height: 11px;
+        }
+
         .logo img {
             height: 35px;
             width: 35px;
