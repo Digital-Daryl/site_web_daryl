@@ -6,6 +6,7 @@ const sendBtn = document.getElementById('chat-send-btn');
 const chatInput = document.getElementById('chat-input');
 const chatMessages = document.getElementById('chat-messages');
 const quickReplies = document.getElementById('chat-quick-replies');
+const servicesChatButton = document.getElementById('services-chat-btn');
 let accueilDemande = false;
 
 function getChatSessionId() {
@@ -102,6 +103,16 @@ async function envoyerMessage(texte) {
 }
 
 if (toggleBtn && chatBox && closeBtn && chatForm && sendBtn && chatInput && chatMessages) {
+    if (servicesChatButton) {
+        servicesChatButton.addEventListener('click', () => {
+            if (chatBox.hidden) {
+                ouvrirChat();
+            } else {
+                chatInput.focus();
+            }
+        });
+    }
+
     toggleBtn.addEventListener('click', () => {
         if (chatBox.hidden) {
             ouvrirChat();
